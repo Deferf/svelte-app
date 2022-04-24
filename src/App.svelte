@@ -1,7 +1,7 @@
 <script>
 	import Frame from "./Frame.svelte";
 	import Chat from "./Chat.svelte"
-	// import { participants, callFrame } from './stores.js';
+	import { participants, callFrame } from './stores.js';
 	/*
 	let dailyObject
 	callFrame.subscribe(value => {
@@ -28,7 +28,18 @@
 
 <h1>{p}</h1> -->
 
-
+<div id = "super_container">
 <Frame/>
 <Chat/>
+</div>
 
+<style>
+	#super_container{
+		height: 500px;
+		align-items: center;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+	}
+
+</style>

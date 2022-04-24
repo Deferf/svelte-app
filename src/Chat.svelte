@@ -40,18 +40,40 @@ s=a.createElement('script');s.async=1;s.src="https://cdn.talkjs.com/talk.js";a.h
 	
 </script>
 
-<!-- <div id="talkjs-container">
-    <i>Loading chat...</i>
-  </div> -->
+<div id="talkjs-container2">
+    <div ><i>Loading chat...</i></div>
+  </div>
 
 <style>
 
-/* #talkjs-container{
-    width: 40%;
+/* #talkjs-container2{
+    width: 298px;
     margin: 30px;
-    height: 500px;
+    height: 100%;
     float: right;
 } */
+
+#talkjs-container2{
+    letter-spacing: normal;
+    box-sizing: border-box;
+    margin: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #e7ecee;
+    overflow-x: hidden;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #4E606A;
+    width: 298px;
+    height: 100%;
+}
 
 </style>
 

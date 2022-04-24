@@ -20,6 +20,7 @@
         //     console.log(Object.keys(a));
         //     $participants = a;
         // });
+       
         dailyObject.on("joined-meeting", initializeChat)
 
         // dailyObject.on("participant-joined", async (e) => {
@@ -32,6 +33,8 @@
         // });
 
         dailyObject.on("participant-joined", someoneJoins)
+        dailyObject.on("participant-left", someoneLeft)
+
 
         await dailyObject.join({
             url: "https://andresportillo.daily.co/hello",
@@ -59,9 +62,8 @@
         inbox.mount(document.getElementById("talkjs-container2"));
     }
 
-    // It is unclear at the moment what should happen
-    // Create conversation
-    // Make it appear on the feed 
+    // This function creates a conversation with the new participant and shows the conversation on the feed
+    // It uses some tricks to tame TalkJS stubborness 
     const someoneJoins = function (res){
         console.log(res)
         console.log(ego)//is ego working? -> it is
@@ -73,13 +75,22 @@
         var conversation = talkSession.getOrCreateConversation(
             Talk.oneOnOneId(ego, other)
         );
-
+        // Select the existing inbox
         let oldInbox = talkSession.getInboxes()[0]
+        // Add participants to conversation
         conversation.setParticipant(ego);
         conversation.setParticipant(other);
+        // Select the conversation, otherwise it returns a 500 error
         oldInbox.select(conversation);
+        // Send a message automatically to enable history and the capability to go back and forth to chat and feed
         conversation.sendMessage(`${ego.name} joined`);
+        // De select previous chat to show all conversations on feed
         oldInbox.select(null);
+    }
+
+    // It may be worthwhile to block new messages for gone peers
+    const someoneLeft = function (res) {
+
     }
 
 </script>
@@ -90,15 +101,15 @@
 
 <div id="container" />
 
-<div id="talkjs-container2">
+<!-- <div id="talkjs-container">
     <i>Loading chat...</i>
-</div>
+</div> -->
 
 <style>
     #container {
         float: left;
         width: 50%;
-        height: 100%;
+        height: 500px;
     }
 
     #talkjs-container2 {
