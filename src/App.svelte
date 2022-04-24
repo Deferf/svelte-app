@@ -1,7 +1,7 @@
 <script>
 	import Frame from "./Frame.svelte";
 	import Chat from "./Chat.svelte"
-	import { participants, callFrame } from './stores.js';
+	// import { participants, callFrame } from './stores.js';
 	/*
 	let dailyObject
 	callFrame.subscribe(value => {
@@ -12,11 +12,11 @@
 	// }
 </script>
 
-{JSON.stringify($participants)}
+<!-- {JSON.stringify($participants)} -->
 
 
-<button on:click={console.log($participants)} >Click me</button>
-<button on:click={console.log(Object.keys($participants))} >Click me</button>
+<!-- <button on:click={console.log($participants)} >Click me</button>
+<button on:click={console.log(Object.keys($participants))} >Click me</button> -->
 
 <!-- {#if $callFrame.participants}
 	 <h1>{Object.keys($callFrame.participants()).length}</h1>

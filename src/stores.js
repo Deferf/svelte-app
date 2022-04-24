@@ -12,3 +12,5 @@ export let participants = writable({});
 // );
 
 //Object.keys(callFrame.participants() )
+
+export let ego = writable({})
