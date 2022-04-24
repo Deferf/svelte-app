@@ -14,7 +14,7 @@ npm install
 npm run dev
 ```
 
-It is also hosted on deferf.github.io
+It is also hosted on  https://deferf.github.io
 
 ## How this is structured
 
