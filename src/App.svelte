@@ -12,6 +12,10 @@
 	// }
 </script>
 
+<svelte:head>
+	<title>Andres Daily Demo</title>
+</svelte:head>
+
 <!-- {JSON.stringify($participants)} -->
 
 
@@ -24,9 +28,6 @@
 
 <button on:click={console.log($callFrame.participants())}>zdfg</button> -->
 
-<!-- <button on:click={console.log($callFrame)}>zdfg</button>
-
-<h1>{p}</h1> -->
 
 <div id = "super_container">
 <Frame/>

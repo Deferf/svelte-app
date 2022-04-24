@@ -1,16 +1,16 @@
 <script>
     import { callFrame, participants} from "./stores.js";
-    import { createEventDispatcher } from "svelte";
 
-    //ff("Hi!-----------------")
-
-    // To have an event based implementation I want to check whether we can mount the chat when we only have 
-    // one user and then check whether we can mount again when someone comes :)
+    // Most of the logic is here.
+    // Once the Daily Object is loaded we handle callbacks when someone triggers some meeting events
 
     const initializeDaily = async () => {
         const container = document.getElementById("container");
+                
+        let dailyObject = window.DailyIframe.createFrame(container, {showLeaveButton: true});
+
+        // Old code used a Svelte store to share the Daily Object with other components
         // $callFrame = window.DailyIframe.createFrame(container);
-        let dailyObject = window.DailyIframe.createFrame(container);
         // THis thing awaits 500 for someone to join? Non optimal, but it is progress! :)
         // dailyObject.on("joined-meeting", async (e)  => {console.log("got into event! :)"); var a = await dailyObject.participants(); await new Promise(resolve => setTimeout(resolve, 1000)); console.log(a);console.log(Object.keys(a)); $participants = a});
         // dailyObject.on("joined-meeting", async (e) => {
@@ -20,7 +20,8 @@
         //     console.log(Object.keys(a));
         //     $participants = a;
         // });
-       
+
+        // Handle when the user first joins the meeting
         dailyObject.on("joined-meeting", initializeChat)
 
         // dailyObject.on("participant-joined", async (e) => {
@@ -31,16 +32,22 @@
         //     $participants = a;
         //     showChat();
         // });
+        // Handle when another user joints the meeting
+        // This event is also fired when the user is new to a meeting with pre-existing participants
 
+        // So here we handle those events
         dailyObject.on("participant-joined", someoneJoins)
+        
+        // TO DO 
         dailyObject.on("participant-left", someoneLeft)
 
-
+        // We need to wait the join method to complete
         await dailyObject.join({
             url: "https://andresportillo.daily.co/hello",
         });
     };
 
+    // ego is the "me" user used by Talk JS
     let ego;
 
     // // Mounts empty chat and initializes the ego object
@@ -108,14 +115,14 @@
 <style>
     #container {
         float: left;
-        width: 50%;
+        width: 60%;
         height: 500px;
     }
 
-    #talkjs-container2 {
+    /* #talkjs-container2 {
         width: 298px;
         margin: 30px;
         height: 500px;
         float: right;
-    }
+    } */
 </style>
